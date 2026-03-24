@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ContactsAPI } from "../data/contactsAPI";
 import Image from "next/image";
+import { formatPhoneNumber } from "react-phone-number-input";
 
 export default function Contacts () {
   const [allContacts, _] = useState(ContactsAPI.all());
@@ -41,7 +42,7 @@ export default function Contacts () {
                   <td><Image src={c.photo} alt="" width={75} height={75} className="img-thumbnail"/></td>
                   <td>{c.name}</td>
                   <td>{c.email}</td>
-                  <td>{c.phone}</td>
+                  <td>{formatPhoneNumber(c.phone)}</td>
                   <td>
                     <div className="col">
                       <div className="row mb-2"><a href="">edit</a></div>
@@ -49,7 +50,8 @@ export default function Contacts () {
                     </div>
                   </td>
                 </tr>
-              ))}</tbody>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
