@@ -3,6 +3,7 @@ import { ContactsAPI } from '@/app/data/contactsAPI';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import nextConfig from '@/next.config';
 
 const NewContact = function () {
   const id = Math.round(Math.random() * 100000000);
@@ -13,7 +14,7 @@ const NewContact = function () {
 	const router = useRouter();
 
   const handleAddContactClick = () => {
-		ContactsAPI.addContact({
+    ContactsAPI.addContact({
 			id,
 			photo,
 			name,

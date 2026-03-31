@@ -1,7 +1,6 @@
 'use client'
 import { useState } from "react";
 import { ContactsAPI } from "../data/contactsAPI";
-import Image from "next/image";
 import { formatPhoneNumber } from "react-phone-number-input";
 
 export default function Contacts () {
@@ -39,7 +38,7 @@ export default function Contacts () {
             <tbody>
               {allContacts.map((c) => (
                 <tr className="" key={c.id}>
-                  <td><Image src={c.photo} alt="" width={75} height={75} className="img-thumbnail"/></td>
+                  <td><img src={c.photo} alt="" width={75} height={75} className="img-thumbnail" /></td>
                   <td>{c.name}</td>
                   <td>{c.email}</td>
                   <td>{formatPhoneNumber(c.phone)}</td>
