@@ -2,12 +2,10 @@
 import { ContactsAPI } from '@/app/data/contactsAPI';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import nextConfig from '@/next.config';
 
 const NewContact = function () {
   const id = Math.round(Math.random() * 100000000);
-  const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState('https://www.clipartmax.com/png/middle/440-4405730_contact-us-personal-icon-png.png');
 	const [name, setName] = useState(null);
 	const [email, setEmail] = useState(null);
   const [phone, setPhone] = useState(null);
@@ -66,6 +64,9 @@ const NewContact = function () {
           </div>
           <div className="mb-3 text-center">
             <button className="btn btn-primary" role="button" onClick={handleAddContactClick}>ADD NEW CONTACT</button>
+          </div>
+          <div className="mb-3 text-center">
+            <button className="btn btn-secondary" role="button" onClick={() => router.push('/contacts')}>CANCEL</button>
           </div>
         </div>
       </div>

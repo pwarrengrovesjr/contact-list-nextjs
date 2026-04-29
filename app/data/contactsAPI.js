@@ -1,5 +1,4 @@
-import PropTypes from "prop-types";
-import { formatPhoneNumber } from "react-phone-number-input";
+import EditContact from "../contacts/edit/[id]/page";
 
 export const ContactsAPI = {
   contacts: [
@@ -18,7 +17,12 @@ export const ContactsAPI = {
 		this.contacts.push({ id, photo, name, email, phone });
 	},
 	get: function (id) {
-		const isContact = (p) => p.number === id;
-		return this.players.find(isContact);
+		const isContact = (c) => c.id === id;
+		return this.contacts.find(isContact);
+	},
+	deleteContact: function () {
+		
 	}
 };
+
+console.log(ContactsAPI.contacts);
