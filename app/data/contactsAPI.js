@@ -1,4 +1,5 @@
-import EditContact from "../contacts/edit/[id]/page";
+'use client'
+import { useParams } from "next/navigation";
 
 export const ContactsAPI = {
   contacts: [
@@ -19,9 +20,6 @@ export const ContactsAPI = {
 	get: function (id) {
 		const isContact = (c) => c.id === id;
 		return this.contacts.find(isContact);
-	},
-	deleteContact: function () {
-		
 	}
 };
 
