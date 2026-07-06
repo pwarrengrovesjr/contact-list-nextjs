@@ -1,5 +1,5 @@
 'use client'
-import { useParams } from "next/navigation";
+import PropTypes from "prop-types";
 
 export const ContactsAPI = {
   contacts: [
@@ -23,4 +23,16 @@ export const ContactsAPI = {
 	}
 };
 
-console.log(ContactsAPI.contacts);
+ContactsAPI.PropTypes = {
+	contacts: PropTypes.arrayOf(PropTypes.object).isRequired
+}
+
+ContactsAPI.contacts.forEach((c) => {
+	return c.PropTypes = {
+		id: PropTypes.number.isRequired,
+		name: PropTypes.string,
+		photo: PropTypes.string,
+		email: PropTypes.string,
+		phone: PropTypes.string
+	}
+})
