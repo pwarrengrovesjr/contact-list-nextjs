@@ -1,14 +1,28 @@
 "use client";
 import { useState } from "react";
 import { ContactsAPI } from "@/app/contacts/data/contactsAPI";
-import { formatPhoneNumber } from "react-phone-number-input";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import axios from "axios";
+import SearchResults from "./components/searchResults";
+import ContactList from "./components/contactList";
 
 export default function Home() {
   const [allContacts, _] = useState(ContactsAPI.all());
   const router = useRouter();
+  const [term, setTerm] = useState('');
 
+  allContacts.sort((a, b) => {
+    const nameA = a.name.toUpperCase();
+    const nameB = b.name.toUpperCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  
   return (
     <div className="container text-center">
       <div className="row pt-5">
@@ -28,8 +42,8 @@ export default function Home() {
         </div>
       </div>
       <div className="row p-5">
-        <div className="col">
-          <input className="form-control" placeholder="Search Contacts" type="search"></input>
+        <div className="col dropdown">
+          <input className="form-control" placeholder="Search Contact Names, Emails, & Phone Numbers (format: +12223334444)" type="search" onChange={(e) => setTerm(e.target.value)} value={term}/>
         </div>
       </div>
       <div className="row p-5">
@@ -48,51 +62,8 @@ export default function Home() {
                 </th>
               </tr>
             </thead>
-            <tbody>
-              {allContacts.map((c) => (
-                <tr className="" key={c.id}>
-                  <td onClick={() => router.push(`/contacts/${c.id}`)}>
-                    <img
-                      src={c.photo}
-                      alt=""
-                      width={75}
-                      height={75}
-                      className="img-thumbnail"
-                    />
-                  </td>
-                  <td onClick={() => router.push(`/contacts/${c.id}`)}>
-                    {c.name}
-                  </td>
-                  <td onClick={() => router.push(`/contacts/${c.id}`)}>
-                    {c.email}
-                  </td>
-                  <td onClick={() => router.push(`/contacts/${c.id}`)}>
-                    {formatPhoneNumber(c.phone)}
-                  </td>
-                  <td>
-                    <div className="col">
-                      <div className="btn-group-vertical row d-inline-flex">
-                        <button
-                          type="button"
-                          className="btn btn-outline-primary"
-                          onClick={() => router.push(`/contacts/edit/${c.id}`)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="btn btn-outline-danger"
-                          onClick={() => {
-                            allContacts.splice(allContacts.indexOf(c), 1);
-                            router.push("/.");
-                          }}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+            <tbody id="contact-list">
+              {term === null ? <ContactList/> : <SearchResults term={term}/>}
             </tbody>
           </table>
         </div>
