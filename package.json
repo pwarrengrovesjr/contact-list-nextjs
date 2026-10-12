@@ -21,7 +21,7 @@
     "react-phone-number-input": "^3.4.16"
   },
   "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "16.2.9"
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.0"
   }
 }
